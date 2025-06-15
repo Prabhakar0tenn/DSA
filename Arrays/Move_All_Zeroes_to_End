@@ -1,0 +1,27 @@
+//problem link:- https://www.geeksforgeeks.org/problems/move-all-zeroes-to-end-of-array0751/1
+
+
+//can also do this by auxilary arry initializing it with 0 and then copying all non zero elements in it  and then coping the axiliarywhile coping make sure don't do temp[i]=arr[i] in for loop as jaha arr[i] 
+//0 hoga waha i skip hoga both arr and tem k liye toh tem bs usi ki copy bn jaayegi so intialize j=0 and do temp[j++]=arr[i] is se j tabhi aage badhega jb i arr[i] m non zero number milega.
+
+class Solution {
+    void pushZerosToEnd(int[] arr) {
+    
+       
+       int count =0;
+       
+       for(int i=0;i<arr.length;i++){
+           
+           if(arr[i]!=0){
+               int t=arr[count];
+              arr[count]=arr[i];
+              arr[i]=t;
+               count++;
+           }
+              
+        }
+        for(int i=count;i<arr.length;i++){
+            arr[i]=0;
+        }
+    }
+}
