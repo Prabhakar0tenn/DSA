@@ -1,0 +1,26 @@
+// logic first reverse 0 to d-1 then d to n and then reverse whole array this rotates the array by d in left
+// also d = d%arr.length important if d array k size se greater hua
+//problem link:- https://www.geeksforgeeks.org/problems/rotate-array-by-n-elements-1587115621/1
+
+
+class Solution {
+    
+        static void reverse(int a[],int start,int end){
+            while(start<end){
+                int temp=a[start];
+                a[start]=a[end];
+                a[end]=temp;
+                start++;
+                end--;
+            }
+            
+        }
+    // Function to rotate an array by d elements in counter-clockwise direction.
+    static void rotateArr(int arr[], int d) {
+
+        d=d%arr.length;
+        reverse(arr,0,d-1);
+        reverse(arr,d,arr.length-1);
+        reverse(arr,0,arr.length-1);
+    }
+}
