@@ -1,0 +1,18 @@
+#problem_link:- https://www.hackerrank.com/challenges/lonely-integer/problem
+
+
+
+public static int lonelyinteger(List<Integer> a) {
+        
+      int count=a.get(0);  
+    for(int i=1;i<a.size();i++){
+        
+                count=count^a.get(i);
+            }
+       
+    return count;
+
+
+    }
+
+}
