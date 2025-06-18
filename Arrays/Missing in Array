@@ -1,0 +1,20 @@
+//Problem_Link:- https://www.geeksforgeeks.org/problems/missing-number-in-array1416/1?page=1&sortBy=submissions
+
+// array ka size 1 toh n-1 h but integers 1 to n liye h isiliye arr.length+1
+
+class Solution {
+    int missingNum(int arr[]) {
+        // code here
+        int s1=0,s2=0;
+        for(int i=1;i<=arr.length+1;i++){ 
+            s1=s1^i;
+            
+        }
+        for(int i=0;i<arr.length;i++){
+            s2=s2^arr[i];
+            
+        }
+        return s1^s2;
+        
+    }
+}
