@@ -1,0 +1,32 @@
+//Problem Link:-   https://www.geeksforgeeks.org/problems/repeated-sum-of-digits3955/1
+
+
+// Java does not optimize tail recursion.
+//So even if it's written in tail-recursive style, Java still uses the call stack for each recursion. That means you won’t get the memory benefits like you would in a language with 
+//Tail Call Optimization (TCO)
+
+// User function Template for Java
+class Solution {
+    public static int fun(int N){
+        // int i=1;
+        int b=N;
+        int sum=0;
+        while(b>0){
+            sum=sum+b%10;
+            b=b/10;
+        
+        }
+        if(sum<=9){
+            return sum;
+        }
+        N=sum;
+        return fun(N);
+    }
+    static int repeatedSumOfDigits(int N) {
+        int c=fun(N);
+        
+        return c;
+        
+    }
+}
+
