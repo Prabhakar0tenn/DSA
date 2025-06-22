@@ -1,0 +1,121 @@
+//problem Link:- https://www.geeksforgeeks.org/problems/find-missing-and-repeating2512/1
+// easy optimal auxilaary array remember:-
+
+class Solution {
+    ArrayList<Integer> findTwoElement(int arr[]) {
+       
+       int[] temp=new int[arr.length];
+       
+       for(int i=0;i<arr.length;i++){
+           temp[i]=0;
+       }
+       for(int i=0;i<arr.length;i++){
+           temp[arr[i]-1]+=1;
+       }
+       int repeat =0 ;
+       int miss =0 ;
+       for(int i=0;i<arr.length;i++){
+           if(temp[i]==2){
+               repeat=i+1;
+           }
+           if(temp[i]==0){
+               miss=i+1;
+           }
+       }
+
+
+        ArrayList<Integer> result = new ArrayList<>();
+        result.add(repeat);
+        result.add(miss);
+        return result;
+    }
+}
+
+
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+//for optimal i.e O(n); use maths like 2 equations
+//S1 = Sum of first n natural numbers 
+//S2 = Sum of squares of first n natural numbers
+//arrSum = Sum of elements in the array
+//arrSqSum = Sum of squares of elements in the array
+//x−y=arrSum−S1
+//x^2−y^2=arrSqSum−S2   //use prop. a square - b square.  // also use long not float as it will cause error in case of large i/p.
+
+class Solution {
+//     ArrayList<Integer> findTwoElement(int arr[]) {
+//         long s1 = 0, sq1 = 0;
+//         int n = arr.length;
+
+//         for (int i = 0; i < n; i++) {
+//             s1 += arr[i];
+//             sq1 += 1L * arr[i] * arr[i];  // cast to long to avoid overflow
+//         }
+
+//         long s2 = 1L * n * (n + 1) / 2;
+//         long sq2 = 1L * n * (n + 1) * (2 * n + 1) / 6;
+
+//         long diff = s1 - s2;             // x - y
+//         long sqDiff = sq1 - sq2;         // x^2 - y^2
+
+//         long sum = sqDiff / diff;        // x + y
+
+//         int repeat = (int)((diff + sum) / 2);
+//         int miss = (int)(repeat - diff);
+
+//         ArrayList<Integer> result = new ArrayList<>();
+//         result.add(repeat);
+//         result.add(miss);
+//         return result;
+//     }
+// }
+
+
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+// O(nlog n) approach
+
+// class Solution {
+//     // Function to find two elements in array
+//     ArrayList<Integer> findTwoElement(int arr[]) {
+        
+        
+            
+//         Arrays.sort(arr);
+        
+//         int miss=0;int repeat=0;
+        
+//         for(int i=0;i<arr.length-1;i++){
+//             if(arr[i]==arr[i+1]){
+//                 repeat=arr[i];
+//             }
+//         }
+//         int xor=0; int xor2=0;
+//         for(int i=0;i<arr.length;i++){
+            
+            
+//             xor2=xor2^arr[i];
+            
+            
+//         }
+//         for(int i=1;i<=arr.length;i++){
+            
+//             xor=xor^i;
+            
+            
+            
+//         }
+//         xor2=xor2^repeat;
+        
+//         miss=xor^xor2;
+        
+//         ArrayList<Integer> result=new ArrayList<>();
+        
+//         result.add(repeat);
+//         result.add(miss);
+        
+//         return result;
+        
+//     }
+// }
