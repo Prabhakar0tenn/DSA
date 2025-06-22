@@ -1,0 +1,40 @@
+//problem link:- https://www.geeksforgeeks.org/dsa/insert-an-adjacent-k-in-place-for-every-occurrence-of-it-in-the-array-keeping-the-size-of-the-array-intact/
+
+//baad m ise 2 pointer se bhi krna h 
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public class Main {
+    public static ArrayList<Integer> duplicateK(ArrayList<Integer> arr, int k) {
+        int n = arr.size();
+      ArrayList<Integer> temp = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+		  if(arr.get(i)==k && temp.size()==n-1){
+            temp.add(k);
+          }
+          else if(arr.get(i)==k && temp.size()<n-1){
+            temp.add(k);
+            temp.add(k);
+          }
+		 
+          else if(temp.size()<n){
+            temp.add(arr.get(i));
+          }
+        }
+      arr.clear();
+	  arr.addAll(temp);
+         
+        return arr;
+    }
+
+    public static void main(String[] args) {
+        ArrayList<Integer> arr = new ArrayList<>(Arrays.asList(1, 0, 2, 3, 0, 4, 5, 0));
+        int k = 0;
+        ArrayList<Integer> ans = duplicateK(arr, k);
+
+        for (int num : ans) {
+            System.out.print(num + " ");
+        }
+    }
+}
