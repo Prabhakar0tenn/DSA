@@ -1,0 +1,29 @@
+//Problem_link:- https://www.geeksforgeeks.org/problems/leaders-in-an-array-1587115620/1
+
+class Solution {
+    static ArrayList<Integer> leaders(int arr[]) {
+        
+        ArrayList<Integer> temp = new ArrayList<>();
+        ArrayList<Integer> temp2 = new ArrayList<>();
+        
+        int max=arr[arr.length-1]; 
+        temp.add(max);
+
+        for(int i=arr.length-2;i>=0;i--){
+            
+            if(arr[i]>=max){
+                max=arr[i];
+                temp.add(max);
+            }
+            
+        }
+        
+        for(int i=temp.size()-1;i>=0;i--){
+            
+            temp2.add(temp.get(i));
+        }
+
+        
+        return temp2;
+    }
+}
