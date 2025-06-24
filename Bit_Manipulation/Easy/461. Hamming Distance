@@ -1,0 +1,16 @@
+//Problem Link:- https://leetcode.com/problems/hamming-distance/
+
+class Solution {
+    public int hammingDistance(int x, int y) {
+
+        int count=0;
+        int xor=x^y; // jaha jaha x and y different honge waha 1 honge
+        int k=1;
+        while(xor>0){
+          xor=xor&(xor-1);   //brian algo ..for set bits finding
+          count++;
+        }
+        return count;
+        
+    }
+}
