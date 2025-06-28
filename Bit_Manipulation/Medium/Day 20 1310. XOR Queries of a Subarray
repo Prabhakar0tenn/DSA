@@ -1,0 +1,91 @@
+//problem link :- https://leetcode.com/problems/xor-queries-of-a-subarray/description/
+____________________________________________________________________________________________________________________________
+
+// O(n) 
+____________________________________________________________________________________________________________________________
+// prefixXor[i] me 0 se i-1 tak ka XOR store karo, fir prefixXor[end+1] ^ prefixXor[start] se subarray ka XOR nikaalo.
+
+// Ek prefixXor[] array banao (size arr.length + 1)
+
+// Isme ith index pe arr[0] se leke arr[i-1] tak ka XOR store karo
+// prefixXor[i] = arr[0] ^ arr[1] ^ ... ^ arr[i-1];
+
+// Kyun banaya ye array?
+
+// Taaki kisi bhi subarray [start, end] ka XOR constant time me nikaal sakein using:
+// prefixXor[end + 1] ^ prefixXor[start];
+
+// Ye kaise kaam karta hai?
+
+// prefixXor[end + 1] → 0 se end tak ka XOR
+// prefixXor[start] → 0 se start-1 tak ka XOR
+// Jab in dono ko XOR karte ho, toh common part cut ho jaata hai, aur bacha:
+// arr[start] ^ arr[start+1] ^ ... ^ arr[end]
+// Ek pass me prefixXor array banao → O(n)
+
+// Har query ke liye bas:
+// result[i] = prefixXor[end + 1] ^ prefixXor[start];
+_______________________________________________________________________________________________________________________________________
+
+class Solution {
+    public int[] xorQueries(int[] arr, int[][] queries) {
+        int [] result= new int[queries.length];
+        int [] prev=new int [arr.length+1];
+        int pre=0;
+        prev[0]=0;
+        for(int i=1;i<=arr.length;i++){
+            pre=pre^arr[i-1];
+            prev[i]=pre;
+   
+        }
+
+        for(int i=0; i<queries.length; i++){
+            int start=queries[i][0];
+            int end=queries[i][1];
+            result[i]=prev[start]^prev[end+1];
+        }
+
+        return result;
+        
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+____________________________________________________________________________________________________________________________________________
+//O(n^q) time complexity
+_____________________________________________________________________________________________________________________________________________
+class Solution {
+    public int[] xorQueries(int[] arr, int[][] queries) {
+        int[] result=new int[queries.length];
+        int k=0;
+        for(int i=0;i<queries.length;i++){
+            int start=queries[i][0];
+            int end=queries[i][1];
+            int xor=0;
+            for(int j=start;j<=end;j++){
+                xor=xor^arr[j];
+            }
+            result[k]=xor;
+            k++;
+        }
+        return result;
+    }
+}
