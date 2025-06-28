@@ -1,0 +1,36 @@
+//Problem Link:- https://leetcode.com/problems/least-number-of-unique-integers-after-k-removals/description/
+
+
+//for O(n) --> priority queue;
+
+
+// O(nlogn)
+class Solution {
+    public int findLeastNumOfUniqueInts(int[] arr, int k) {
+      Map<Integer,Integer> freq = new HashMap<>();
+      
+      for(int n : arr){
+        freq.put(n, freq.getOrDefault(n,0)+1);
+      }
+
+
+     // ab map m sorting possible nhi toh map ko list m store kr k then list ko sort kr do
+
+     List <Map.Entry<Integer,Integer>> l=  new ArrayList<>(freq.entrySet());
+
+     l.sort((a,b)->a.getValue()-b.getValue());
+
+     for(Map.Entry<Integer,Integer> e:l){
+        int f=e.getValue();
+        if(k>=f){
+            k-=f;
+            freq.remove(e.getKey()); // list ko ierate krte hue usme se remove nhi kr skte //ConcurrentModificationException dega.
+        }
+
+     }
+
+     return freq.size();
+
+
+    }
+} 
