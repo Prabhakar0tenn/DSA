@@ -1,14 +1,47 @@
 //Problem Link:- https://www.geeksforgeeks.org/problems/stock-buy-and-sell2615/1
 _______________________________________________________________________________________________________________________________________________
+// 2 Methods exist....
+______________________________________________________________________________________________________________________________________________
+
+//prices = [100, 180, 260, 310, 40, 535, 695]
+// till 100 to 310 
+
+// 180 > 100 → +80
+
+// 260 > 180 → +80
+
+// 310 > 260 → +50
+// net= 210 orr 310-100=210 then update min 
+
+// // either accumulate daily gains or do net of min till next time when arr[i]<arr[i-1] same thing 
+
+// arr[i]<arr[i-1]  just divided whole into 2 chunks and calculated min to max differences 
+// and daily accumulation just skipped the point where arr[i]<arr[i-1] 
+// and both are same thing
 
 
-
-
+// also this method of daily gains works when It's written "you can sell and buy aor buy and sell on same day"
+_____________________________________________________________________________________________________________________________________________
+//Daily gains O(n) and O(1)
+____________________________________________________________________________________________________________________________________________________
+class Solution {
+    public int maximumProfit(int arr[]) {
+    
+     int profit=0;
+     for(int i=1;i<arr.length;i++){
+         if(arr[i]>arr[i-1]){
+             profit+=arr[i]-arr[i-1];
+         }
+     }
+   
+   return profit;
+    }
+}
 
 _____________________________________________________________________________________________________________________________________________
+// chunking 
 //O(n) and O(1) complexity
-
-_______________________________________________________________________________________________________________________________________________
+_____________________________________________________________________________________________________________________________________________
 class Solution {
     public int maximumProfit(int prices[]) {
     int min=prices[0];
