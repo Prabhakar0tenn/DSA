@@ -1,6 +1,66 @@
 //Problem Link:- https://www.geeksforgeeks.org/problems/majority-vote/1
 
 
+__________________________________________________________________________________________________________________________________________________
+//Mooray's Voting Algorithm  O(n)
+
+// if count1==0 && num!=ele 2 -->num=ele1 ---> vice versa for ele2;
+//if num==ele1 or ele2 increase respective counts;
+//if num != ele1 or ele2 count--(for both)
+_______________________________________________________________________________________________________________________________________________
+class Solution {
+    public ArrayList<Integer> findMajority(int[] arr) {
+        
+        ArrayList<Integer> result=new ArrayList<>();
+        int ele1=0;
+        int ele2=1;
+        int count1=0;
+        int count2=0;
+        for(int i=0;i<arr.length;i++){
+            if(count1==0 && arr[i]!=ele2){
+                ele1=arr[i];
+                count1++;
+            }
+            else if(count2==0 && arr[i]!=ele1){
+                ele2=arr[i];
+                count2++;
+            }
+            else if(arr[i]==ele1){
+                count1++;
+            }
+            else if(arr[i]==ele2){
+                count2++;
+            }
+            
+            else if(arr[i]!=ele1 && arr[i]!=ele2){
+                count1--;
+                count2--;
+            }
+        }
+        int realcount1=0;int realcount2=0;
+        for(int i=0;i<arr.length;i++){
+            if(arr[i]==ele1){
+                realcount1++;
+            }
+            else if(arr[i]==ele2){
+                realcount2++;
+            }
+        }
+        
+        if(realcount1>arr.length/3){
+            result.add(ele1);
+        }
+        if(realcount2>arr.length/3){
+            result.add(ele2);
+        }
+        Collections.sort(result);
+        
+        return result;
+    }
+}
+
+
+
 _________________________________________________________________________________________________________________________________________________
 //By frequency array O(n) time complexity
 _____________________________________________________________________________________________________________________________________________
