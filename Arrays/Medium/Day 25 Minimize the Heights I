@@ -1,0 +1,94 @@
+//Problem Link:- https://www.geeksforgeeks.org/problems/minimize-the-heights-i/1
+
+
+________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
+//O(nlog(n)..
+________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
+//Logic
+________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
+// [0,.....,i |partion|, i+1,n-1] 
+
+// ho skta h left range m +k krne p koi element new max bn gya ho as right range m -k krne p value decrease ho gyi ho eg. [1,2,3,4,5] and k=3 => [4,5,0,1,2]  aur humesha left range m jb
+ //plus ho rha aur array sorted h toh ith element hi new max bn ne ka potential rakhta h as left range m wahi sabse bada h aur kuch plus krne p bhi entire rang m sabse bada wahi rahega same right range m sabme se -k ho rha 
+//toh tabhi sabse bada n-1th element hi rahega as wo sabse bada h toh kuch minus bhi hua poori range m se toh sabse km impact usi ko pada
+// // and comparision b/w  max(arr[i]+k and arr[n-1]-k) as koi bhi bada ho skta dono m se  as like 
+// abhi dekha [1,2,3,4,5] and k=3 => [4,5,0,1,2] but if [1,2,3,4, 10000] and k=1 then 4-1=3 and 100-1 =9999 still old max bada h mtl n-1th element 
+// rest koi aur case nhi hoga as left range m sab i se chote and right range m sab n-1 se
+
+// and same logic wise 
+// min=min(arr[0]+k and ar[i+1]-k) as left range m sabse chota 0th index element and right range m sabse chota i+1th index element;
+// eg. [1,2,3,4,5] k=3 => [4,5,0,1,2] see i+1th means 3 has become new min aisa nhi bhi ho skta dusre case m like [1,10,20]  k=1 => 2, 9,19 see old 0th index still min..
+
+// and ans ko update karo via ans=min(ans,max-min).
+________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
+
+
+class Solution {
+    public int getMinDiff(int[] arr, int k) {
+        Arrays.sort(arr);
+        int n=arr.length;
+        int difference=arr[n-1]-arr[0];
+        
+        for(int i=0;i<=n-2;i++){ //n-2 tk isiliye chala rhe kyuni -ar[0]+k+arr[n-1]+k= arr[n-1]-arr[0] humne pehle hi difference m store kr liya tha  ans = arr[n-1] - arr[0] 
+            
+            int min =Math.min(arr[0]+k,arr[i+1]-k);
+            int max=Math.max(arr[i]+k,arr[n-1]-k);
+            difference=Math.min(difference,max-min);
+        }
+        
+        return difference;
+    }
+}
+
+________________________________________________________________________________________________________________________________________________
+// O(n^2) but TLE
+________________________________________________________________________________________________________________________________________________
+
+// User function Template for Java
+class Solution {
+    public static int max(int[] arr){
+        int m=Integer.MIN_VALUE;
+        for(int i=0;i<arr.length;i++){
+            if(m<arr[i]){
+                m=arr[i];
+            }
+        }
+        return m;
+    }
+    public static int min(int[] arr){
+        int m=Integer.MAX_VALUE;
+        for(int i=0;i<arr.length;i++){
+            if(m>arr[i]){
+                m=arr[i];
+            }
+        }
+        return m;
+    }
+    public static int modify(int[] arr,int c,int k){
+        int [] temp=new int[arr.length];
+        for(int i=0;i<arr.length;i++){
+            temp[i]=arr[i];
+        }
+        
+        for(int i=0;i<c;i++){
+            temp[i]+=k;
+        }
+        for(int i=c;i<arr.length;i++){
+            temp[i]-=k;
+        }
+        
+        return max(temp) - min(temp);
+    }
+    public int getMinDiff(int[] arr, int k) {
+        Arrays.sort(arr);
+        
+        int difference= Integer.MAX_VALUE; int c=0;
+        
+        while(c<=arr.length){
+            difference=Math.min(difference,modify(arr,c,k));
+            c++;
+        }
+        
+        return difference;
+    }
+}
