@@ -1,0 +1,26 @@
+//Problem Link:- https://www.geeksforgeeks.org/problems/kadanes-algorithm-1587115620/1
+
+//O(n) and O(1) 
+
+//Kadane's algorithm
+//[-2,-3,4,-1,-2,1,5,-3]
+//current= -3 or -2 -3 =-5
+//either carry previous debt or not if previous summation negative leave if positive add
+//max=-2 as if aage kbhi possibly sum krke ya leave kr k kahi se start kr ke badi value milti toh update nhi toh abhi tk minium toh yhi h aur continuation m iske for subarray aisa koi numbers aaye nhi ki isme add kiye jaaye agar future m milta toh kar denge pdate 
+//current aage ki possibility check krta h aur max abhi tk ka result max store krta agar aage ki possibilty bni max se jyada ki toh update
+//current woks on principal ki linear contiguous hona chahiye toh agar prev sum +ve h toh add nhi toh -ve h toh leave and continue from arr[i]
+//example agr [-2,-3] hota toh max=-2 and current first -2 then -3 now now possibility aage so max =-2 as max of max and current;
+// agar [-2,-3,1,1,1] hota toh then max=-2 then current=-3 then 1 then max=1 then current =2 then max=2 then current =3 the max=3;
+
+
+class Solution {
+    int maxSubarraySum(int[] arr) {
+        int current=arr[0];// agar Integer.MIN_VALUE; loge toh last -2147483648 h agar isme -1 plus hoga current+arr[i] toh positive ka 2147483647 aa jaayega
+        int max=arr[0];
+        for(int i=1;i<arr.length;i++){
+            current=Math.max(arr[i],current+arr[i]);
+            max=Math.max(max,current);
+        }
+        return max;
+    }
+}
