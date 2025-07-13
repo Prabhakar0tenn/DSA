@@ -1,0 +1,34 @@
+//Problem Link:- https://leetcode.com/problems/rotate-image/description/
+
+// approach:- transpose karo only upper triangular matrix ko swap mtlb i aur j and only when j>i or can start j from i+1
+//then reverse each row like if 1 2 3 then 3 2 1 for each row do this
+
+class Solution {
+    public static void swap(int[][]arr,int a,int b){
+        int temp=arr[a][b];
+        arr[a][b]=arr[b][a];
+        arr[b][a]=temp;
+    }
+    public void rotate(int[][] arr) {
+        
+        for(int i=0;i<arr.length;i++){
+            for(int j=i+1;j<arr[0].length;j++){
+                swap(arr,i,j);
+            }
+        }
+
+        for(int i=0;i<arr.length;i++){
+            int s=0;
+            int e=arr[0].length-1;
+            while(s<e){
+                int temp=arr[i][s];
+                arr[i][s]=arr[i][e];
+                arr[i][e]=temp;
+                s++;
+                e--;
+            }
+        }
+
+
+    }
+}
