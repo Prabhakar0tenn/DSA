@@ -1,0 +1,122 @@
+//Problem Link:- https://leetcode.com/problems/set-matrix-zeroes/description/
+
+//O(m x n) and O(1) space
+class Solution {
+    public void setZeroes(int[][] arr) {
+        
+        int flag1=0;
+        int flag2=0;
+
+        for(int j=0;j<arr[0].length;j++){
+            if(arr[0][j]==0){
+                flag1=1;
+            }
+        }
+
+        for(int i=0;i<arr.length;i++){
+            if(arr[i][0]==0){
+                flag2=1;
+            }
+        }
+
+        
+
+        for(int i=1;i<arr.length;i++){
+            for(int j=1;j<arr[0].length;j++){
+                if(arr[i][j]==0){
+                    arr[0][j]=0;
+                    arr[i][0]=0;
+                }
+            }
+        }
+        for( int i=1;i<arr.length;i++){
+            if(arr[i][0]==0){
+                for(int j=1;j<arr[0].length;j++){
+                    arr[i][j]=0;
+                }
+            }
+        }
+
+        for(int j=0;j<arr[0].length;j++){
+            if(arr[0][j]==0){
+                for(int i=1;i<arr.length;i++){
+                    arr[i][j]=0;
+                }
+            }
+        }
+
+        if(flag1==1){
+          for(int j=0;j<arr[0].length;j++){
+            arr[0][j]=0;
+          }
+        }
+
+         if(flag2==1){
+          for(int i=0;i<arr.length;i++){
+            arr[i][0]=0;
+          }
+        }
+    }
+}
+
+//O(m+n) space
+
+class Solution {
+    public void setZeroes(int[][] arr) {
+
+        Set<Integer> r=new HashSet<>();
+        Set<Integer> c=new HashSet<>();
+
+        for(int i=0;i<arr.length;i++){
+            for(int j=0;j<arr[0].length;j++){
+                if(arr[i][j]==0){
+                    r.add(i);
+                    c.add(j);
+                }
+            }
+        }
+
+        for(int x:r){
+            for(int j=0;j<arr[0].length;j++){
+                arr[x][j]=0;
+            }
+        }
+
+        for(int x:c){
+            for(int i=0;i<arr.length;i++){
+                arr[i][x]=0;
+            }
+        }
+        
+    }
+}
+
+//O(m x n) both complexity and space
+
+class Solution {
+    public void setZeroes(int[][] arr) {
+    
+    List<int[]> l=new ArrayList<>();
+
+
+    for(int i=0;i<arr.length;i++){
+        for(int j=0;j<arr[0].length;j++){
+            if(arr[i][j]==0){
+                l.add(new int[]{i,j});
+            }
+        }
+    }
+    for(int[] e: l){
+        int a=e[0];
+        int b=e[1];
+
+        for(int j=0;j<arr[0].length;j++){
+            arr[a][j]=0;
+        }
+        for(int i=0;i<arr.length;i++){
+            arr[i][b]=0;
+        }
+    }
+        
+    }
+}
